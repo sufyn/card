@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Open+Sans:wght@400;600&family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 20 14.3% 4.1%;
+  --muted: 60 4.8% 95.9%;
+  --muted-foreground: 25 5.3% 44.7%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 20 14.3% 4.1%;
+  --card: 0 0% 100%;
+  --card-foreground: 20 14.3% 4.1%;
+  --border: 20 5.9% 90%;
+  --input: 20 5.9% 90%;
+  --primary: 354 100% 71%; /* coral #FF6B6B */
+  --primary-foreground: 211 100% 99%;
+  --secondary: 43 100% 70%; /* sunshine #FFD166 */
+  --secondary-foreground: 24 9.8% 10%;
+  --accent: 252 95% 85%; /* lavender #A5B4FC */
+  --accent-foreground: 24 9.8% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 60 9.1% 97.8%;
+  --ring: 20 14.3% 4.1%;
+  --radius: 0.5rem;
+  --chart-1: 354 100% 71%;
+  --chart-2: 43 100% 70%;
+  --chart-3: 252 95% 85%;
+  --chart-4: 157 89% 78%; /* mint #96F7D2 */
+  --chart-5: 345 100% 84%; /* softPink #FFAFCC */
+  
+  /* Custom colors */
+  --coral: 354 100% 71%;
+  --sunshine: 43 100% 70%;
+  --lavender: 252 95% 85%;
+  --mint: 157 89% 78%;
+  --soft-pink: 345 100% 84%;
+  --warm-gray: 335 25% 96%;
+}
+
+.dark {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 354 100% 71%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 43 100% 70%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 252 95% 85%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-opensans antialiased text-gray-700;
+    background: linear-gradient(135deg, #F9F7F3 0%, #FFE8E8 100%);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-quicksand font-bold;
+  }
+}
+
+@layer utilities {
+  .font-quicksand {
+    font-family: 'Quicksand', sans-serif;
+  }
+  
+  .font-opensans {
+    font-family: 'Open Sans', sans-serif;
+  }
+  
+  .font-urdu {
+    font-family: 'Noto Nastaliq Urdu', serif;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-coral to-soft-pink text-transparent bg-clip-text;
+  }
+  
+  .bg-gradient {
+    @apply bg-gradient-to-r from-coral to-soft-pink;
+  }
+  
+  /* We're using the direct Tailwind classes for these colors now */
+  /* The colors are defined in tailwind.config.ts */
+}
+
+/* Animation utilities */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Cloud Animation */
+@keyframes drift {
+  0% { transform: translateX(-5%); }
+  50% { transform: translateX(5%); }
+  100% { transform: translateX(-5%); }
+}
+
+.cloud {
+  width: 100px;
+  height: 40px;
+  background: #fff;
+  border-radius: 100px;
+  position: relative;
+  animation: drift 15s ease-in-out infinite;
+}
+
+.cloud:before, .cloud:after {
+  content: '';
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.cloud:before {
+  width: 50px;
+  height: 50px;
+  top: -20px;
+  left: 10px;
+}
+
+.cloud:after {
+  width: 40px;
+  height: 40px;
+  top: -15px;
+  right: 15px;
+}
+
+/* Star Animation */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.stars {
+  background-color: #000;
+  background-image: radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 7px);
+  background-size: 100px 100px;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* Card Flip Animation */
+.card-container {
+  perspective: 1000px;
+}
+
+.card {
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  backface-visibility: hidden;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
